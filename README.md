@@ -1,2 +1,3 @@
 # Etch-A-Sketch
-Etch-A-Sketch!! A application where you can draw on a grid. Will add more features and create a better UI when I learn more.
+Etch-A-Sketch with HTML, CSS, and JS.  An application where you can draw on a grid.  
+[Live Demo](https://spookyflame10.github.io/Etch-A-Sketch/) :point_left:
