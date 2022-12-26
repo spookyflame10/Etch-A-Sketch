@@ -28,10 +28,10 @@ button.addEventListener('click', () => {
 
 function hoverPen(){
     const gridItems = container.querySelectorAll('.grid-item');
-    mouseDown = false;
     gridItems.forEach(gridItem => {
+        gridItem.removeEventListener('mouseover', mouseOver);
         gridItem.addEventListener('mouseover', colorGrid);
-    });
+      });
 }
 function changeColor(e){
     switch (e.target.id) { 
@@ -48,24 +48,26 @@ function changeColor(e){
 }
 
 function clearGrid(){
-    var gridItems = container.querySelectorAll('div');
-    gridItems.forEach(gridPixel => gridPixel.style.backgroundColor = '#ffffff');
+    window.location.reload();
+    // var gridItems = container.querySelectorAll('div');
+    // gridItems.forEach(gridPixel => gridPixel.style.backgroundColor = '#ffffff');
 }
 function precisePen(){
     const gridItems = container.querySelectorAll('.grid-item');
     gridItems.forEach(gridItem => {
         gridItem.removeEventListener('mouseover', colorGrid);
-        gridItem.onmousedown = (e) => mouseDown = true;
+        gridItem.onmousedown = (e) => {mouseDown = true; colorGrid(e);};
         gridItem.addEventListener('mouseup', () => mouseDown = false);
-        gridItem.onmousemove = (e) =>{
-            if(mouseDown){
-                colorGrid(e)
-            }
-            else{
-                return;
-            }
-        }        
-      });
+        gridItem.addEventListener('mouseover', mouseOver);
+    });
+}
+function mouseOver(e){
+    if(mouseDown){
+        colorGrid(e)
+    }
+    else{
+        return;
+    }
 }
 function makeGrid(size){
     container.style.gridTemplateColumns= `repeat(${size}, 1fr)`;
