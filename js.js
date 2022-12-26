@@ -7,7 +7,6 @@ let size = 16;
 let mouseDown = false;
 
 const container = document.querySelector('.grid-container');
-const button = document.querySelector('button'); //size button
 const pen = document.querySelector('#pen-color'); //user choice color
 const clear = document.querySelector('#clear');
 const colorButtons = document.querySelectorAll('.color-choice');
@@ -15,17 +14,25 @@ const gridItem1 = document.createElement('div');
 const eraser = document.querySelector('#eraser');
 const precise = document.querySelector('#precise');
 const hover = document.querySelector('#hover');
+const sizeValue = document.getElementById('sizeValue')
+const sizeSlider = document.getElementById('sizeSlider')
 
 hover.onclick = () => hoverPen();
 precise.onclick = () => precisePen();
 colorButtons.forEach(colorButton => colorButton.addEventListener('click', changeColor));
 clear.onclick = () => clearGrid();
 pen.oninput = (e) => {color = e.target.value;};
-button.addEventListener('click', () => {
-    size = prompt("please enter size", 16);
+sizeSlider.addEventListener('mousemove', updateSizeValue);
+sizeSlider.onchange = (e) => {
+    size = e.target.value; 
+    container.innerHTML = '';
     makeGrid(size);
-});
+}
 
+
+function updateSizeValue(e) {
+    sizeValue.innerHTML = `${e.target.value} x ${e.target.value}`
+  }
 function hoverPen(){
     const gridItems = container.querySelectorAll('.grid-item');
     gridItems.forEach(gridItem => {
